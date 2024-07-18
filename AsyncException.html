@@ -1,0 +1,29 @@
+<html>
+   
+    <script>
+       function div(a,b)
+       {
+
+            setTimeout(()=>{
+                if(isNaN(a) || isNaN(b))
+                {
+                    throw new Error('A or b is NaN');
+                }
+                else
+                {
+                    console.log('A/b ',a/b);
+                }
+            },2000);
+
+       }
+       try
+       {
+            div(10,NaN);
+       }
+       catch(e)
+       {
+        console.log('Error ',e);
+       }
+       console.log('End');
+    </script>
+</html>
