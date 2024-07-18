@@ -1,0 +1,31 @@
+<html>
+   
+    <script>
+       function method1()
+       {
+            //business logic
+            console.log("business logic >>1");
+       }
+       function method2()
+       {
+            //business logic
+            console.log("business logic >>2");
+       }
+
+       function logger(fun)
+       {
+            return function()
+            {
+                console.log(fun.name + ' started');
+                let result = fun();
+                console.log(fun.name+ ' ended ');
+                return result;
+            }
+       }
+       method1 = logger(method1);
+       method2 = logger(method2);
+
+       method1();
+       method2();
+    </script>
+</html>
