@@ -17,7 +17,7 @@ public class ThreadDemo extends Thread{
     }
     public void run()
     {
-        for (int i = 0; i <= 10000; i++) {
+        for (int i = 0; i <= 100; i++) {
             System.out.println("Thread "+this.name+ " i==> "+i);
         }
     }
