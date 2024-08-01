@@ -2,7 +2,7 @@ abstract class Animal
 {
     abstract void shout();
 }
-class Duck extends Animal
+class Duck 
 {
     void shout()
     {
