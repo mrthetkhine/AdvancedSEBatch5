@@ -1,0 +1,28 @@
+<html>
+   
+    <script>
+        let obj = {
+            method1()
+            {
+                    //business logic
+                    console.log("business logic >>1");
+            },
+            method2()
+            {
+                    //business logic
+                    console.log("business logic >>2");
+            }
+
+        }
+        const logHandler = {
+            get(target, prop, receiver) {
+                console.log(prop, ' was called');
+                return target[prop];
+            },
+        };
+
+        const proxy2 = new Proxy(obj, logHandler);
+        proxy2.method1();
+        proxy2.method2();
+    </script>
+</html>
