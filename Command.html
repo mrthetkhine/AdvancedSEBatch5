@@ -1,0 +1,26 @@
+<html>
+   
+    <script>
+
+        executor.log = [];
+        function executor(func)
+        {
+            setTimeout(()=>{
+                executor.log.push(func.name);
+                func();
+            },1000)
+            
+        }
+
+        function hello()
+        {
+            console.log('Hello');
+        }
+        function hi()
+        {
+            console.log('hi');
+        }
+        executor(hello);
+        executor(hi);
+    </script>
+</html>

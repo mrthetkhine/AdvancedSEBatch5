@@ -1,0 +1,21 @@
+<html>
+   
+    <script>
+
+        function gateway1()
+        {
+            console.log('Gateway 1 process');
+        }
+        function gateway2()
+        {
+            console.log('Gateway 2 process');
+        }
+        let mapping = {
+            'g1':gateway1,
+            'g2':gateway2
+        };
+
+        let gatewayName = 'g2';
+        mapping[gatewayName]();
+    </script>
+</html>
