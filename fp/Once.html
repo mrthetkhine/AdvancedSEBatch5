@@ -1,0 +1,45 @@
+
+<html>
+    <script>
+
+        let done = false;
+        /*
+        function payment()
+        {
+            if(!done)
+            {
+                console.log('Payment');
+                done = true;
+            }
+            
+        }*/
+        function payment()
+        {
+            console.log('Payment'); 
+        }
+        function transfer()
+        {
+            console.log('Transfer');
+        }
+        //payment();
+        //payment();
+        function once(fn)
+        {
+            let done = false;
+            return function(...args)
+            {
+                if(!done)
+                {
+                    done = true;
+                    return fn(...args);
+                }
+            }
+        }
+        payment = once(payment);
+        payment();
+        payment();
+        transfer = once(transfer);
+        transfer();
+        transfer();
+    </script>    
+</html>

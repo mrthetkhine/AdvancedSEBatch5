@@ -1,0 +1,25 @@
+<html>
+    <script>
+        function business1()
+        {
+            console.log('Business 1');
+        }
+        function business2()
+        {
+            console.log('Business 2');
+        }
+        function logger(fun)
+        {
+            return function()
+            {
+                console.log('Before ',fun.name , ' called ');
+                fun();
+                console.log('After ',fun.name, ' returned');
+            }
+        }
+        let fun1 = logger(business1);
+        let fun2 = logger(business2);
+        fun1();
+        fun2();
+    </script>    
+</html>

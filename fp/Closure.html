@@ -1,0 +1,16 @@
+<html>
+    <script>
+        function uniqueId()
+        {
+            let id = 0;
+            return function()
+            {
+                return id++;
+            }
+        }
+        let unique = uniqueId();
+        console.log('unique ',unique());
+        console.log('unique ',unique());
+        console.log('unique ',unique());
+    </script>    
+</html>

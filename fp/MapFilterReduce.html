@@ -1,0 +1,52 @@
+
+<html>
+    <script>
+        let students = [
+            {
+                name : 'Aung Aung',
+                age : 21,
+                gender: 'Male',
+            },
+            {
+                name : 'Hla Hla',
+                age : 19,
+                gender: 'Fmale',
+            },
+            {
+                name : 'Mya Mya',
+                age : 30,
+                gender: 'Female',
+            },
+            {
+                name : 'Hla Aung',
+                age : 12,
+                gender: 'Male',
+            },
+            {
+                name : 'Win Aung',
+                age : 31,
+                gender: 'Male',
+            },
+            {
+                name : 'Tin Tin',
+                age : 29,
+                gender: 'Female',
+            },
+            {
+                name : 'Win OO',
+                age : 34,
+                gender: 'Male',
+            },
+        ];
+        let result = [];
+
+        const isMale = student=>student.gender =='Male';
+        result = students.filter(isMale)
+                         .reduce((a,b)=>{
+                            return a.age < b.age ? a : b;
+                         })   
+        console.log('Result ',result);
+
+
+    </script>    
+</html>

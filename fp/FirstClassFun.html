@@ -1,0 +1,25 @@
+<html>
+    <script>
+        function hello()
+        {
+            console.log('Hello');
+        }
+        //rule 1
+        let fun = hello;
+        fun();
+
+        //rule 2
+        function getFun(f)//Higher order function
+        {
+            f();
+        }
+        getFun(hello);
+
+        //rule 3
+        function getAnother()//Higher order function
+        {
+            return hello;
+        }
+        getAnother()();
+    </script>    
+</html>

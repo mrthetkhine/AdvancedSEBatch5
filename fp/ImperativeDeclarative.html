@@ -1,0 +1,44 @@
+<html>
+    <script>
+        let students = [
+            {
+                name : 'Aung Aung',
+                age : 21,
+                gender: 'Male',
+            },
+            {
+                name : 'Hla Hla',
+                age : 19,
+                gender: 'Fmale',
+            },
+            {
+                name : 'Mya Mya',
+                age : 30,
+                gender: 'Female',
+            },
+            {
+                name : 'Win Aung',
+                age : 31,
+                gender: 'Male',
+            },
+            {
+                name : 'Tin Tin',
+                age : 29,
+                gender: 'Female',
+            },
+        ];
+        let result = [];
+
+        for(const student of students)
+        {
+            if( student.gender == 'Female')
+            {
+                result.push(student);
+            }
+        }
+        console.log('Result ',result);
+
+        result = students.filter(student=>student.gender=='Male');
+        console.log('Result ',result);
+    </script>    
+</html>

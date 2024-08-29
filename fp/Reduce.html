@@ -1,0 +1,16 @@
+
+<html>
+    <script>
+        let data = [1,2,3,-4,5];
+        console.log('Data ',data);
+        let sum = data.reduce( (a,b)=>{
+            console.log('A ',a, ' B ',b);
+            return a+b;
+        });
+        
+        console.log('Sum ',sum);        
+        let min = data.reduce((a,b)=> a > b? b: a);
+        console.log('Min ',min);
+
+    </script>    
+</html>
