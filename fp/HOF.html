@@ -3,6 +3,7 @@
         function business1()
         {
             console.log('Business 1');
+            return 10;
         }
         function business2()
         {
@@ -10,16 +11,17 @@
         }
         function logger(fun)
         {
-            return function()
+            return function(...args)
             {
                 console.log('Before ',fun.name , ' called ');
-                fun();
+                let ret = fun(...args);
                 console.log('After ',fun.name, ' returned');
+                return ret;
             }
         }
         let fun1 = logger(business1);
         let fun2 = logger(business2);
-        fun1();
+        console.log(fun1());
         fun2();
     </script>    
 </html>

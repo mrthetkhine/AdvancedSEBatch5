@@ -1,0 +1,31 @@
+
+<html>
+    <script>
+
+
+        const ZERO = f => x => x;
+        const ONE = f => x => f(x)   //λf.λx.fx
+        const TWO = f => x => f(f(x))   // λf.λx.f(fx)
+        const THREE = f =>x => f(f(f(x))) 
+        let TO_INTEGER = n=> n(x=>x+1)(0)
+        let f = x  =>{
+            console.log('Jump ');
+            return x+1;
+        }
+        //console.log(TO_INTEGER(ZERO));
+        console.log(ONE(f)(0));
+        console.log('Jump 3 times');
+        console.log( THREE(f)(0));
+
+        //+1
+        const SUCC = n => f => x => f(n(f)(x))
+        const FOUR = SUCC(THREE);
+        console.log('Jump 4 times');
+        console.log( FOUR(f)(0));
+        let SUM =  m => n => n(SUCC)(m);
+        const SEVEN = SUM(THREE)(FOUR);
+
+        console.log('Jump 7 times');
+        console.log( SEVEN(f)(0));
+    </script>    
+</html>

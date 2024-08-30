@@ -13,9 +13,9 @@
             }
             
         }*/
-        function payment()
+        function payment(orderId)
         {
-            console.log('Payment'); 
+            console.log('Payment ',orderId); 
         }
         function transfer()
         {
@@ -36,8 +36,8 @@
             }
         }
         payment = once(payment);
-        payment();
-        payment();
+        payment('order-1');
+        payment('order-1');
         transfer = once(transfer);
         transfer();
         transfer();

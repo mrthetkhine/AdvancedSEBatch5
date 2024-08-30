@@ -1,0 +1,17 @@
+
+<html>
+    <script>
+        const TRUE  = t => f => t
+        const FALSE = t => f => f
+        const AND = p => q => p(q)(p);
+        const OR = p => q => p(p)(q) 
+
+        let True = TRUE(true)(false);
+        let False = FALSE(true)(false);
+        console.log(TRUE(true)(false));
+        console.log(FALSE(true)(false));
+
+        console.log('AND ' , AND(TRUE)(TRUE)(true)(false));
+        console.log('OR ' , OR(TRUE)(FALSE)(true)(false));
+    </script>    
+</html>

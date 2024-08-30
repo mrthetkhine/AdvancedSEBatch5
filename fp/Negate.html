@@ -1,0 +1,25 @@
+<html>
+    <script>
+        const not = fn => x=> !fn(x);
+        
+        let arr = [1,2,3,4,5,6,7];
+        const isEven = (x)=> x%2==0;
+        const isOdd = not(isEven);
+
+        console.log('EvenList ',arr.filter(isEven));
+        console.log('OddList ',arr.filter(isOdd));
+
+        const unary = fun=> (...args)=>fun(args[0]);
+        //map (fun, )
+        //parseInt(string,radix)
+        //parseInt('123.45',0)
+        //parseInt('-67.8',1);
+        console.log(["123.45", "-67.8", "90"].map(parseInt));
+        console.log(["123.45", "-67.8", "90"].map(unary(parseInt)));
+        console.log('parseInt ',parseInt( "-67.8"));
+
+        arr.map((value,index,array)=>{
+            console.log('value ',value,' index ',index, ' Array ',array);
+        });
+    </script>    
+</html>

@@ -1,0 +1,40 @@
+
+<html>
+    <script>
+
+        /*
+            1:2,
+            2:5
+            3:3,
+            4:1
+
+            [2,3]
+        */
+        let arr = [2,2,1,1,2,4,2,3,2,3,3];
+        let group = {};
+
+        group = arr.reduce((gp,item)=>{
+            if(gp[item])
+            {
+                gp[item]++;
+            }
+            else
+            {
+                gp[item] = 1;
+            }
+            return gp;
+        },{});
+        console.log('Group ',group);
+       
+        console.log('Group ',group);
+        let groupArr = Object.entries(group);
+        console.log('Group Arr ',groupArr);
+
+        groupArr.sort((a,b)=>b[1]-a[1]);
+        console.log('Group Arr ',groupArr);
+
+        let mostFrequent = groupArr.map(arr=>arr[0]);
+        console.log('mostFrequent Arr ',mostFrequent);
+        
+    </script>    
+</html>

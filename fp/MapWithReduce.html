@@ -1,0 +1,26 @@
+
+<html>
+    <script>
+
+        let arr = ['apple','orange','banana'];
+        console.log('Arrmap  ',arr.map(item=>item.toUpperCase()));
+
+        function map(arr,fn)
+        {
+            return arr.reduce((array,item)=>{
+                return [...array,fn(item)];
+            },[]);
+        }
+        console.log(map(arr, (item)=>item.toUpperCase()));
+
+        function filter(arr,predFn)
+        {
+            return arr.reduce((array,item)=>{
+                return predFn(item)? [...array,item]: array;
+            },[]);
+        }
+        let nums = [1,2,3,4,5,6,7];
+        let isEven = (num)=>num %2 ==0;
+        console.log('Evenlist ', filter(nums, isEven));
+    </script>    
+</html>
