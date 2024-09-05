@@ -1,0 +1,22 @@
+
+<html>
+    <script>
+
+        function add(x,y)
+        {
+            return x+y;    
+        }
+        console.log();
+        function curry(fn)
+        {
+            //console.log('fn length ',fn.length);
+            return function(x)
+            {
+                return fn.length==1?fn(x): curry(fn.bind(null,x));
+            }
+        }
+        console.log( curry(add)(1)(2));
+        
+        
+    </script>    
+</html>

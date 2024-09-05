@@ -1,0 +1,39 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+    <script>
+      
+        let arr = [-1,20,4,5];
+        console.log("Max ",R.apply(Math.max)(arr));
+        console.log('Range ',R.range(1,5));
+        
+        /*
+            5!= 5 * 4* 3* 2* 1;
+            //range = (n)=> R.range(1,n+1);
+        */
+       console.log(R.reduce(R.add, 0, [1, 2, 3, 4]) );
+       const fact=(n) => R.reduce(R.multiply,1, R.range(1,n+1));
+       console.log('Fact (5) ',fact(5));
+
+       // x/5+2 , 5/x
+       // x,y => x/y=
+       const newFun = R.pipe(R.flip(R.divide)(5),R.add(2));
+       console.log('NewFunc ',newFun(10));
+
+       let obj = {
+            address2: 'Somewhere',
+            city:'City'  
+       };
+       console.log('R.has ',R.has('address')(obj));
+       console.log('R.prop ', R.prop('address')(obj));
+
+       let result = R.ifElse( 
+            R.has('address'), 
+            R.prop('address'), 
+            R.prop('city')
+        );
+        console.log('Result ',result(obj));
+
+        const even = x => x % 2 == 0;
+        console.log(R.count(even, [1, 2, 3, 4, 5]));
+    </script>
+</html>

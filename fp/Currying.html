@@ -1,0 +1,40 @@
+
+<html>
+    <script>
+
+        function curry(fn)
+        {
+            //console.log('fn length ',fn.length);
+            return function(x)
+            {
+                return fn.length==1?fn(x): curry(fn.bind(null,x));
+            }
+        }
+        function add(x,y)
+        {
+            return x+y;
+            
+        }
+       
+        function double(x)
+        {
+            return x*2;
+        }
+        function multiBy3(x)
+        {
+            return x/3;
+        }
+        //funA,funB,funC
+        function pipe(...fns)
+        {
+            return function(x)
+            {
+                return fns.reduce((input,fun)=> fun(input) ,x);
+            }
+        }
+        //add(3)=> x+3
+        let newFun = pipe(curry(add)(3), double);
+        console.log('new Fun ',newFun(6));
+        
+    </script>    
+</html>

@@ -1,0 +1,29 @@
+
+<html>
+    <script>
+
+        function addOne(x)
+        {
+            return x+1;
+        }
+        function double(x)
+        {
+            return x*2;
+        }
+        function multiBy3(x)
+        {
+            return x/3;
+        }
+        //funA,funB,funC
+        function composeMany(...fns)
+        {
+            return function(x)
+            {
+                return fns.reduceRight((input,fun)=> fun(input) ,x);
+            }
+        }
+        //2->1 = 3 * 2 = 6/3->2 
+        const newFun = composeMany(multiBy3, double,addOne);
+        console.log('new Fun ',newFun(2));
+    </script>    
+</html>

@@ -1,0 +1,51 @@
+
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+    <script>
+
+        /*
+            1:2,
+            2:5
+            3:3,
+            4:1
+
+            [2,3]
+        */
+        let arr = [2,2,1,1,2,4,2,3,2,3,3];
+        /*
+        let group = R.countBy(R.identity)(arr);
+        console.log('Group ',group);
+        console.log('ToPairs ',R.toPairs(group));
+
+        let pairs = R.toPairs(group);
+        const sortBySecondItem = R.sortBy(R.prop(1));
+        console.log('Sort By Second item ',sortBySecondItem(pairs));
+
+        let result = R.takeLast(2,sortBySecondItem(pairs),);
+        console.log('Result ',result);
+        */
+
+        const sortBySecondItem = R.sortBy(R.prop(1));
+        const log =(message)=> (x)=> {
+            console.log(message, x);
+            return x;
+        }
+        let frequentK = R.pipe(  
+            R.countBy(R.identity),
+            log('After count '),
+            R.toPairs,
+            log('After to pair'),
+            sortBySecondItem,
+            log('After sort'),
+            R.takeLast(2),
+            log('After Take last'),
+            R.reverse,
+            log('After reverse'),
+            R.map(R.prop(0))
+        );
+        console.log('Frequent K ',frequentK(arr));
+
+        const sayX = x => console.log('x is ' + x);
+        console.log('Tap ',R.tap(sayX)( 100)); //=> 100
+    </script>    
+</html>
