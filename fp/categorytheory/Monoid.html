@@ -1,0 +1,26 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        let Sum = {
+            identity: ()=>0,
+            binary:(x,y)=>x+y,
+        }
+        let Min = {
+            identity: ()=>Number.MAX_SAFE_INTEGER,
+            binary:(x,y)=>x < y?x: y,
+        }
+
+        function fold(list,monoid)
+        {
+            let result = monoid.identity();
+            for(let item of list)
+            {
+                result = monoid.binary(result,item);
+            }
+            return result;
+        }
+        let arr = [1,2,3,-4,5];
+        console.log('Sum ', fold(arr,Sum));
+        console.log('Min ', fold(arr,Min));
+    </script>
+</html>

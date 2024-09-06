@@ -1,0 +1,32 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        //x => 
+        const Functor = (x)=>({
+            valueOf:()=>x,
+            map:(fn)=>Functor(fn(x))
+        });
+        Functor.of = Functor;
+
+        const inc = (x)=>x+1;
+        const double = (x)=>x * 2;
+        const multiplyBy2 = (x)=> x / 2;
+
+        let container = Functor.of(10);
+        let result = container
+                            .map(inc)
+                            .map(double)
+                            .map(multiplyBy2);
+        console.log('Container ',container);
+        console.log('Result ',result.valueOf());
+
+        //law 1
+        console.log('container.map(identity) ',container.valueOf()== container.map(R.identity));
+        //law2
+        const newFunc = R.pipe( inc, double, multiplyBy2);
+        result = container.map(newFunc);
+        console.log('Result ',result.valueOf());
+
+        //
+    </script>
+</html>

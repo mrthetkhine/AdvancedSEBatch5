@@ -1,0 +1,23 @@
+
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+    <script>
+
+        let obj = {
+            name: "TK",
+            address : {
+                city: "YGN"
+            }
+        }
+        //set address.city.street = 
+        console.log('obj?.address?.city ',obj?.address?.city);
+        console.log('Path ',R.path(['address','city'])(obj));
+        let obj2 = R.assocPath(['address','city','street'],'Some location',obj);
+        console.log('Obj2 ',obj2);
+
+        const nameLen = R.lens(R.prop('name'), R.assoc('name'));
+        console.log('View ',R.view(nameLen, obj));
+        console.log('View ',R.set(nameLen, 'Another',obj));
+        console.log('Over ',R.over(nameLen, R.toLower, obj));
+    </script>    
+</html>

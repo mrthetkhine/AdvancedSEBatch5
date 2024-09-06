@@ -1,0 +1,22 @@
+
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+    <script>
+
+        function delay()
+        {
+            setTimeout(()=>{
+                console.log('fired');
+                throw new Error('Delay exception');
+            },1000);
+        }
+        try
+        {
+            delay();
+        }
+        catch(e)
+        {
+            console.log('Caught error ',e);
+        }
+    </script>    
+</html>

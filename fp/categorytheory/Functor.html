@@ -1,0 +1,17 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        let arr = ['hello'];
+        const fun1 = x=>x.toUpperCase();
+        const fun2 = x=> x + ' hi';
+        let result = arr.map(fun1)//fun1
+                        .map(fun2);//fun2
+        console.log('result ',result);
+        result = arr.map( R.pipe( fun1, fun2));
+        console.log('result ',result);
+        //law 1, map(iden)=> identity value
+
+        let arr2 = [1];
+        console.log(arr2.map(R.identity));
+    </script>
+</html>

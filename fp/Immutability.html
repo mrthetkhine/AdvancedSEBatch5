@@ -1,0 +1,29 @@
+
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.30.0/dist/ramda.min.js"></script>
+    <script>
+
+        let obj = {
+            name: "TK",
+            city : "YGN"
+        }
+        function updateCity(obj)
+        {
+            return {
+                ...obj,
+                city : 'somewhere'
+            }
+        }
+        console.log('UpdateCity ',updateCity(obj));
+        function getProp(propName)
+        {
+            return function(obj)
+            {
+                return obj[propName];
+            }
+        }
+        console.log('getProp ',getProp('name')(obj));
+        console.log('Prop ',R.prop('name')(obj));
+        console.log('Props ',R.props(['name','city'])(obj));
+    </script>    
+</html>

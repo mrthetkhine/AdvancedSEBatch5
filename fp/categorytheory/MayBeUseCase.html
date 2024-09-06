@@ -1,0 +1,61 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+       
+        const MayBe = (x)=>({
+            valueOf:()=>x,
+            map(fn){
+                return this.isNothing()?MayBe.of(null): MayBe(fn(x));
+            },
+            isNothing:()=> x===undefined || x=== null,
+            orElse(defaultValue)
+            {
+                return this.isNothing()?MayBe.of(defaultValue):this;
+            }
+        });
+        MayBe.of = MayBe;
+
+        let employees = {
+            1: {
+                name: 'Employee1',
+               
+            },
+            2:{
+                name: 'Employee2',
+                supervisor : 1,
+            },
+            3:{
+                name: 'Employee3',
+                supervisor : 2,
+            }
+        }
+        function getSupervisorNameOfEmp(empId)
+        {
+            let emp = employees[empId];
+            if(emp)
+            {
+                if(emp.supervisor)
+                {
+                    let supervisorId = emp.supervisor;
+                    let supervisor = employees[supervisorId];
+                    if(supervisor)
+                    {
+                        return supervisor.name;
+                    }
+                }
+            }
+        }
+        function getSuper(id)
+        {
+            return MayBe.of( employees[id])
+                       // .map(data=>(console.log(data),data))
+                        .map(emp=>emp.supervisor)
+                        //.map(data=>(console.log(data),data))
+                        .map(supId=>employees[supId])
+                        .map(sup=>sup.name);
+        }
+        console.log('getSuper 3 ',getSupervisorNameOfEmp(3));
+        console.log('getSuper 3 ',getSuper(3).valueOf());
+        console.log('getSuper 1 ',getSuper(1).orElse('No Supervisor').valueOf());
+        </script>
+</html>
