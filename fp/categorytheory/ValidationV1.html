@@ -1,0 +1,38 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        let obj = {
+            name : 'TK',
+            age : 40,
+            email: 'someone@gmail.com'
+        };
+
+        const minLength = (len)=>(x)=> (x+'').length >=len;
+        const maxLength = (len)=>(x)=> (x+'').length <= len;
+        const minValue = (value)=> x=> x >=value;
+        const maxValue = (value)=> x=> x <= value;
+
+        const validName = (obj)=> minLength(3)(obj.name) && maxLength(10)(obj.name);
+        const validEmail = (obj)=> obj.email.contains('@');
+        const validAge =(obj)=> minValue(0)(obj.age) && maxValue(100)(obj.age);
+
+        let minLengthTwo = minLength(2);
+        let maxLength3 = maxLength(3);
+        console.log('MinLength ',minLengthTwo('hi'));
+        console.log('MinLength ',minLengthTwo('h'));
+        console.log('maxlength3 hello ',maxLength3('hello'));
+        console.log('maxlength3 hel ',maxLength3('hel'));
+
+        console.log('minvalue 3 5 ', minValue(3)(5));
+        console.log('minvalue 3 2 ', minValue(3)(2));
+
+        console.log('maxValue 3 4 ', maxValue(3)(4));
+        console.log('maxValue 3 2 ', maxValue(3)(2));
+        
+        console.log('Validname ',validName(obj));
+        console.log('Validname ',validName({name:'HelloName'}));
+
+        console.log('valid age ',validAge(obj));
+        console.log('valid age ',validAge({age : -3}));
+    </script>
+</html>

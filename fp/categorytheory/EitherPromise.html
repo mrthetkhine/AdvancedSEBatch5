@@ -1,0 +1,12 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        //Left->Failure
+        //Right->Success
+        Promise.reject(100)
+                .then( data=>data*2, error=>{
+                    throw new Error(error);
+                })
+                .then(console.log,console.error)
+    </script>
+</html>

@@ -1,0 +1,26 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        function div(a,b)
+        {
+            setTimeout(()=>{
+                if(isNaN(a) || isNaN(b))
+                {
+                    throw new Error('A or b is error');
+                }
+                else
+                {
+                    return a/b;
+                }
+            },1000);
+        }
+        try
+        {
+            div(NaN,2);
+        }
+        catch(e)
+        {
+            console.log('Error ',e);
+        }
+    </script>
+</html>

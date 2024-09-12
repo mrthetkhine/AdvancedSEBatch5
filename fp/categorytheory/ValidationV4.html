@@ -1,0 +1,138 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+   
+    <script>
+        //Failure
+        const Left =(value)=>({
+            value,
+            map(fn)
+            {
+                return Left.of(value);
+            },
+            isLeft()
+            {
+                return true;
+            },
+            and(another)
+            {
+                return another.isLeft()?Left.of([...value,...another.value]):this;
+            },
+            or(another)
+            {
+                return another.isLeft()?Left.of([...value,...another.value]):another;
+            },
+            matchWith(context)//{left,right}
+            {
+                //console.log('Failure ',context);
+                return context.left(value);
+            },
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Left.of = Left;
+        const Right =(value)=>({
+            value,
+            map(fn)
+            {
+                return Right.of(fn(value));
+            },
+            isLeft()
+            {
+                return false;
+            },
+            and(another)
+            {
+                return another.isLeft()?another:this;
+            },
+            or(another)
+            {
+                return another.isLeft()?another:this;
+            },
+            matchWith(context)
+            {
+                //console.log('Sucess ',context);
+                return context.right(value);
+            },
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Right.of = Right;
+
+        
+
+        let obj = {
+            name : 'TK',
+            age : 40,
+            email: 'someone@gmail.com'
+        };
+
+        const minLength = (len)=>(x)=> (x+'').length >=len;
+        const maxLength = (len)=>(x)=> (x+'').length <= len;
+        const minValue = (value)=> x=> x >=value;
+        const maxValue = (value)=> x=> x <= value;
+
+        const validName = (obj)=> minLength(3)(obj.name) && maxLength(10)(obj.name);
+        const validEmail = (obj)=> obj.email.includes('@');
+        const validAge =(obj)=> minValue(0)(obj.age) && maxValue(100)(obj.age);
+
+        //const validAgeV2 = (obj)=>validAge(obj)?Right.of(obj): Left.of('Invalid Age');
+        const validatorV2 =(validator)=>(errorMessage)=>(obj)=> validator(obj)?Right.of(obj): Left.of([errorMessage]);
+        
+        const validAgeV2 =obj=> validatorV2(validAge)('Invalid Age')(obj);
+        const validEmailV2 =obj=> validatorV2(validEmail)('Invalid email')(obj);
+        const validNameV2 =obj=> validatorV2(validName)('Invalid name')(obj);
+
+        //[validName,validAge]
+        //(obj)=>Left/Right
+        //and identity true
+        function and(...validators)
+        {
+            return function(obj)
+            {
+                return validators.reduce( (input,fn)=> input.and(fn(obj)) , Right.of(obj));
+            }
+        }
+        function or(...validators)
+        {
+            return function(obj)
+            {
+                return validators.reduce( (input,fn)=> input.or(fn(obj)) , Left.of([]));
+            }
+        }
+        const andRule = and(validNameV2,validEmailV2);
+        andRule({
+            name: '',
+            email: ''
+        }).matchWith({
+            left:(errors)=>console.error('validation errors ',errors),
+            right:(obj)=>console.log('Validation success ',obj)
+        });
+        andRule({
+            name: 'Mr TK',
+            email: ''
+        }).matchWith({
+            left:(errors)=>console.error('validation errors ',errors),
+            right:(obj)=>console.log('Validation success ',obj)
+        });
+        andRule({
+            name: 'Mr TK',
+            email: 'me@gmail.com'
+        }).matchWith({
+            left:(errors)=>console.error('validation errors ',errors),
+            right:(obj)=>console.log('Validation success ',obj)
+        });
+
+        const orRule = or(validNameV2,validEmailV2);
+        orRule({
+            name: '',
+            email: 'hello@gmail.com'
+        }).matchWith({
+            left:(errors)=>console.error('Or validation errors ',errors),
+            right:(obj)=>console.log('Validation success ',obj)
+        });
+    </script>
+</html>
