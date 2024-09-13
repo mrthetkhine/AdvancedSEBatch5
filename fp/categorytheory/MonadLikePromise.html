@@ -1,0 +1,10 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        //Promise.resolve(100)
+        Promise.reject('Erorr')
+                //.then(x=> Promise.resolve(x*2))//Monadic function
+                .then(x=> (x*2),err=>100)//Monadic function
+                .then(x=>console.log(x));
+    </script>
+</html>

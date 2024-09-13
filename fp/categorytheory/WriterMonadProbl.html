@@ -1,0 +1,42 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+    <script>
+     //Ref https://blog.klipse.tech/javascript/2016/08/31/monads-javascript.html
+     const Container = (value)=>({
+            map(fn) 
+            {
+                return Container.of(fn(value));
+            },
+            flatMap(fn)
+            {
+                return fn(value);
+            },
+            ap(c) //Container-value fn
+            {
+                return c.map(value);
+            },
+            flat()
+            {
+                return value;
+            },
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Container.of = Container;
+        const incOne = (x)=>{
+          //console.log('Inc One ',x);
+          return [x+ 1,'Inc one'];
+        }  
+        const double = (x) =>{
+            //console.log('Double ',x);
+            return  [x * 2,'Double'];
+        };
+        let result = Container.of(3)
+                               .flatMap(incOne)
+                               .flatMap(double);
+        console.log('Result ',result);  
+
+    </script>
+</html>

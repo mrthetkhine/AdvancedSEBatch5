@@ -1,0 +1,64 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.28.0/ramda.js"></script>
+    <script>
+        const Container = (value)=>({
+            map(fn) 
+            {
+                return Container.of(fn(value));
+            },
+            flatMap(fn)
+            {
+                return fn(value);
+            },
+            ap(c) //Container-value fn
+            {
+                return c.map(value);
+            },
+            flat()
+            {
+                return value;
+            },
+            valueOf()
+            {
+                return value;
+            }
+        });
+        Container.of = Container;
+       
+        const MayBe = (x)=>({
+            valueOf:()=>x,
+            map(fn){
+                return this.isNothing()?MayBe.of(null): MayBe(fn(x));
+            },
+            isNothing:()=> x===undefined || x=== null,
+            orElse(defaultValue)
+            {
+                return this.isNothing()?MayBe.of(defaultValue):this;
+            }
+        });
+        MayBe.of = MayBe;
+
+        let employees = {
+            1: {
+                name :'Emp1'
+            },
+            2: {
+                name : 'Emp2'
+            }
+        }
+        function getEmployeeById(id)
+        {
+            return MayBe.of( employees[id]);
+        }
+        let result = Container.of(1)
+                  .map(getEmployeeById)  //Container(MayBe(employee)), Container(value)
+                  .flat()//MayBe(employee)
+                  .map(emp=>emp.name);
+        console.log('Result ',result.valueOf());
+
+        result = Container.of(1)
+                  .flatMap(getEmployeeById)  //MayBe(employee)
+                  .map(emp=>emp.name);
+        console.log('Result ',result.valueOf());
+    </script>
+</html>

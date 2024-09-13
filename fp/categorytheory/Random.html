@@ -1,0 +1,14 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/ramda@0.27.1/dist/ramda.min.js"></script>
+<script>
+    function random(seed) {
+        const nextSeed = (1839567234 * seed + 972348567) % 8239451023
+        return nextSeed;
+    }
+    let r1 = random(1);
+    let r2 = random(r1);
+    console.log('seed 1 ',r1);
+    console.log('seed 1 ',r2);
+</script>
+
+</html>
