@@ -50,14 +50,24 @@ public class Delimiter {
 				}
 				if(this.isEndDelimiter(ch))
 				{
-					Character topElement = this.delimiter.pop();
-					if(! this.isPair(topElement, ch))
+					if(!this.delimiter.isEmpty())
+					{
+						Character topElement = this.delimiter.pop();
+						if(! this.isPair(topElement, ch))
+						{
+							return false;
+						}
+					}
+					//unbalanced tag seeing end tag, but there is no start tag
+					else
 					{
 						return false;
 					}
+					
 				}
 				
 			}
+			//check no starter tag left
 			return this.delimiter.isEmpty();
 		}
 		
