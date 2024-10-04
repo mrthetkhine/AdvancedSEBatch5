@@ -9,6 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import com.turing.tdd.advancedse5.tdd.MockitoExplanatoryTest;
+
+import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
+
 
 /*
  * 
@@ -18,6 +23,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 	a[b{c}d]e}  // not correct; nothing matches final }
 	a{b(c)      // not correct; Nothing matches opening
  * */
+@Slf4j
 public class DelimiterTest {
 
 	  Delimiter delimiter = new Delimiter();
@@ -43,6 +49,14 @@ public class DelimiterTest {
 	  void testPositiveCase(String input) {
 			System.out.println("Test testPositiveCase "+input);
 			assertTrue(delimiter.isBalance(input));  
+	  }
+	  
+	  @Test
+	  public void testNumericalOverflow()
+	  {
+		  int a = 2147483647;
+		  a++;
+		  log.info("A " +a);
 	  }
 	 
 }

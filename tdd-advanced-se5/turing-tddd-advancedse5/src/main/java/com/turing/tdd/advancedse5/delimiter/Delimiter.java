@@ -69,6 +69,7 @@ public class Delimiter {
 			}
 			//check no starter tag left
 			return this.delimiter.isEmpty();
+			
 		}
 		
 	}

@@ -11,6 +11,7 @@ import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -167,4 +168,20 @@ public class MockitoExplanatoryTest {
 		log.info("Argument "+ argument.getValue());
 		assertEquals("one",argument.getValue());
 	}
+	/*
+	@Test
+	public void testTimeout()
+	{
+		Compute compute = mock(Compute.class);
+		try
+		{
+			Thread.sleep(100);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		compute.somethod(2500);
+		verify(compute,timeout(200)).somethod(2500);
+	}*/
 }
