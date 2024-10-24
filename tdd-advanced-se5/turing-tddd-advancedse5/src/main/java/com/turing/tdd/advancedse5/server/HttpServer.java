@@ -10,8 +10,9 @@ public class HttpServer {
 	
 	int port = 8080;
 	ServerSocket serverSocket;
-	HttpServer()
+	HttpServer(int port)
 	{
+		this.port = port;
 		try {
 			this.serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
@@ -71,6 +72,6 @@ public class HttpServer {
 	}
 	public static void main(String[]args)
 	{
-		new HttpServer();
+		new HttpServer(8080);
 	}
 }
