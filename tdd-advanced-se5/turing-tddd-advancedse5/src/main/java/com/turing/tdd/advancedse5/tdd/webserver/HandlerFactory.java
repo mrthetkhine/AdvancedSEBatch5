@@ -9,7 +9,8 @@ public class HandlerFactory {
 	public void handleRequest(Socket socket)
 	{
 		log.info("HandleRequest ");
-		RequestHandler handler = new RequestHandler(socket);
+		HttpRequestParser parser = new HttpRequestParser();
+		HttpClientHandler handler = new HttpClientHandler(socket,parser);
 		handler.start();
 	}
 }

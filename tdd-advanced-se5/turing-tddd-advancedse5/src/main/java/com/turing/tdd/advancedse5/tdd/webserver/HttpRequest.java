@@ -2,42 +2,36 @@ package com.turing.tdd.advancedse5.tdd.webserver;
 
 import java.util.HashMap;
 
-public class HttpRequest {
-	String httpMethod;
-	HashMap<String,String> headers;
-	String body;
+public class HttpRequest extends HttpMessage{
+	private String httpMethod;
+	private String url;
+	
 	
 	public HttpRequest()
 	{
-		this.headers = new HashMap<>();
+		super();
 	}
+
 
 	public String getHttpMethod() {
 		return httpMethod;
 	}
 
+
 	public void setHttpMethod(String httpMethod) {
 		this.httpMethod = httpMethod;
 	}
 
-	public HashMap<String, String> getHeaders() {
-		return headers;
-	}
-	public String getHeaderValue(String header)
-	{
-		String value = this.headers.get(header);
-		return value ==null?"":value;
-	}
-	public void setHeaders(HashMap<String, String> headers) {
-		this.headers = headers;
+
+	public String getUrl() {
+		return url;
 	}
 
-	public String getBody() {
-		return body;
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public void setBody(String body) {
-		this.body = body;
-	}
+	
 	
 }
