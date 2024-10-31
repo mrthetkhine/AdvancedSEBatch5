@@ -10,7 +10,11 @@ public class HandlerFactory {
 	{
 		log.info("HandleRequest ");
 		HttpRequestParser parser = new HttpRequestParser();
-		HttpClientHandler handler = new HttpClientHandler(socket,parser);
+		
+		HttpResponseHandler responseHandler = new HttpResponseHandler();
+		HttpResponseTransformer transformer = new HttpResponseTransformer();
+		HttpClientHandler handler = new HttpClientHandler(socket,parser,responseHandler,transformer);
+		
 		handler.start();
 	}
 }

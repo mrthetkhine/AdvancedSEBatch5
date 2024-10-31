@@ -67,7 +67,7 @@ public class WebServerTest {
 		
 	}
 
-	/*
+	
 	@Test
 	public void testBasicHttp200Ok()throws Exception
 	{
@@ -79,5 +79,5 @@ public class WebServerTest {
 		HttpClient client =  HttpClient.newHttpClient();
 		HttpResponse<String> response =client.send(request, BodyHandlers.ofString());
 		log.info("body "+response.body());
-	}*/
+	}
 }

@@ -43,14 +43,18 @@ public class HttpRequestParser {
 	}
 
 	private void parseStatusLine(HttpRequest response, String[] lines) {
-		String firstLine = lines[0];
-		String[] requestLines = firstLine.split(" ");
-		String method = requestLines[0];
-		String url = requestLines[1];
-		String httpVersion = requestLines[2];
+		if(lines.length>0)
+		{
+			String firstLine = lines[0];
+			String[] requestLines = firstLine.split(" ");
+			String method = requestLines[0];
+			String url = requestLines[1];
+			String httpVersion = requestLines[2];
+			
+			response.setHttpMethod(method);
+			response.setHttpVersion(httpVersion);
+			response.setUrl(url);
+		}
 		
-		response.setHttpMethod(method);
-		response.setHttpVersion(httpVersion);
-		response.setUrl(url);
 	}
 }

@@ -1,6 +1,8 @@
 package com.turing.tdd.advancedse5.tdd.webserver;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
@@ -10,14 +12,22 @@ import lombok.extern.slf4j.Slf4j;
 public class HttpClientHandler extends Thread{
 	
 	HttpRequestParser parser;
+	HttpResponseHandler responseHandler;
+	HttpResponseTransformer responseTransformer;
 	
 	Socket socket;
 	HttpRequest request;
+	HttpResponse response;
 	
-	public HttpClientHandler(Socket socket,HttpRequestParser parser)
+	public HttpClientHandler(Socket socket,
+			HttpRequestParser parser,
+			HttpResponseHandler responseHandler,
+			HttpResponseTransformer responseTransformer)
 	{
 		this.socket = socket;
 		this.parser = parser;
+		this.responseHandler = responseHandler;
+		this.responseTransformer  = responseTransformer;
 	}
 	public void run()
 	{
@@ -25,6 +35,15 @@ public class HttpClientHandler extends Thread{
 		//Response writing
 		this.parseRequest();
 		this.procesResponse();
+		this.writeResponse();
+		try
+		{
+			this.socket.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	void parseRequest()
 	{
@@ -33,8 +52,10 @@ public class HttpClientHandler extends Thread{
 	}
 	private String readHttpRequestStream() {
 		String httpRequest = "";
-		try(DataInputStream  din = new DataInputStream(this.socket.getInputStream()))
+		DataInputStream  din = null;
+		try
 		{
+			din = new DataInputStream(this.socket.getInputStream());
 			log.info("Parse Request");
 			int contentLength = 0;
 			
@@ -70,5 +91,20 @@ public class HttpClientHandler extends Thread{
 	void procesResponse()
 	{
 		log.info("procesResponse");
+		this.response = this.responseHandler.handle(request);
+	}
+	void writeResponse()
+	{
+		byte[] data = this.responseTransformer.transformResponse(response);
+		String responseStr = new String(data);
+		log.info("Response "+responseStr);
+		
+		try(DataOutputStream dout = new DataOutputStream(this.socket.getOutputStream()))
+		{
+			dout.write(data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

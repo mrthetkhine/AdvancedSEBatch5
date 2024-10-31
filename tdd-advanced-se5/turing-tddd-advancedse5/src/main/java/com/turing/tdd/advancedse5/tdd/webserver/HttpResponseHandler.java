@@ -3,6 +3,7 @@ package com.turing.tdd.advancedse5.tdd.webserver;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,6 +15,8 @@ public class HttpResponseHandler {
 	private static final String POST = "POST";
 	private static final String GET = "GET";
 
+	ContentTypeResolver contentTypeResolver = new ContentTypeResolver();
+	
 	public HttpResponse handle(HttpRequest request)
 	{
 		HttpResponse response = new HttpResponse();
@@ -34,17 +37,28 @@ public class HttpResponseHandler {
 			try {
 				//Path path =Paths.get(Config.ROOT_URL+"/index.html");
 				log.info("Path "+path);
-				String text = new String(Files.readAllBytes(Paths.get(Config.ROOT_URL+"/index.html")), StandardCharsets.UTF_8);
+			
+				String fileName = path.getFileName().toString();
+				String fileExtension = fileName.substring(fileName.lastIndexOf(".")+1);
+				String contentType = this.contentTypeResolver.resolve(fileExtension);
+				String text = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
 				
 				response.setHttpVersion(request.getHttpVersion());
 				response.setStatusCode(200);
 				
 				response.setStatusCodeDescription("OK");
 				response.setHeader("Content-Length", text.length()+"");
-				response.setHeader("Content-Type","text/html");
+				response.setHeader("Content-Type",contentType);
 				
 				response.setBody(text);
-			} catch (IOException e) {
+			}
+			catch(NoSuchFileException notFound)
+			{
+				response.setStatusCode(404);
+				response.setStatusCodeDescription("Not Found");
+				response.setHeader("Content-Type","text/html");
+			}
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				response.setHttpVersion(request.getHttpVersion());
 				response.setStatusCode(500);
