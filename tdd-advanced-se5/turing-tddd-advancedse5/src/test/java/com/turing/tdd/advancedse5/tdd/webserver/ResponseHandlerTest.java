@@ -13,9 +13,7 @@ public class ResponseHandlerTest {
 	@Test
 	public void testGetRootPage()
 	{
-		HttpRequest request = new HttpRequest();
-		request.setHttpMethod("GET");
-		request.setHttpVersion("HTTP/1.1");
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();
@@ -26,12 +24,16 @@ public class ResponseHandlerTest {
 		assertTrue(response.getHeaders().size()>0);
 		assertNotNull(response.getBody());
 	}
-	@Test
-	public void testGetIndexPage()
-	{
+	private HttpRequest makeHttpGetRequest() {
 		HttpRequest request = new HttpRequest();
 		request.setHttpMethod("GET");
 		request.setHttpVersion("HTTP/1.1");
+		return request;
+	}
+	@Test
+	public void testGetIndexPage()
+	{
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/index.html");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();
@@ -45,9 +47,7 @@ public class ResponseHandlerTest {
 	@Test
 	public void testNotFound()
 	{
-		HttpRequest request = new HttpRequest();
-		request.setHttpMethod("GET");
-		request.setHttpVersion("HTTP/1.1");
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/home.html");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();
@@ -60,9 +60,7 @@ public class ResponseHandlerTest {
 	@Test
 	public void testHelloPage()
 	{
-		HttpRequest request = new HttpRequest();
-		request.setHttpMethod("GET");
-		request.setHttpVersion("HTTP/1.1");
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/hello.html");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();
@@ -75,9 +73,7 @@ public class ResponseHandlerTest {
 	@Test
 	public void testCSSContentType()
 	{
-		HttpRequest request = new HttpRequest();
-		request.setHttpMethod("GET");
-		request.setHttpVersion("HTTP/1.1");
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/theme.css");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();
@@ -90,9 +86,7 @@ public class ResponseHandlerTest {
 	@Test
 	public void testJSContentType()
 	{
-		HttpRequest request = new HttpRequest();
-		request.setHttpMethod("GET");
-		request.setHttpVersion("HTTP/1.1");
+		HttpRequest request = makeHttpGetRequest();
 		request.setUrl("/lib.js");
 		
 		HttpResponseHandler handler = new HttpResponseHandler();

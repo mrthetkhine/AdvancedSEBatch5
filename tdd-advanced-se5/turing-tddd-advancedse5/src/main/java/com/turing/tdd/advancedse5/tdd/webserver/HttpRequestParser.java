@@ -18,12 +18,12 @@ public class HttpRequestParser {
 		return response;
 	}
 
-	private void parseHeadersAndBody(HttpRequest response, String[] lines) {
+	private void parseHeadersAndBody(HttpRequest response, String[] httpRequestLines) {
 		HashMap<String, String> headers = response.getHeaders();
 		int i=1;
-		for(;i< lines.length;i++)
+		for(;i< httpRequestLines.length;i++)
 		{
-			String header = lines[i];
+			String header = httpRequestLines[i];
 			if(header.isBlank())//body
 			{
 				break;
@@ -34,9 +34,9 @@ public class HttpRequestParser {
 				headers.put(keyValues[0], keyValues[1]);
 			}
 		}
-		if( i < lines.length-1)//we have body
+		if( i < httpRequestLines.length-1)//we have body
 		{
-			String body = lines[lines.length-1];
+			String body = httpRequestLines[httpRequestLines.length-1];
 			log.info("Body "+body);
 			response.setBody(body);
 		}
@@ -45,8 +45,8 @@ public class HttpRequestParser {
 	private void parseStatusLine(HttpRequest response, String[] lines) {
 		if(lines.length>0)
 		{
-			String firstLine = lines[0];
-			String[] requestLines = firstLine.split(" ");
+			String statusLine = lines[0];
+			String[] requestLines = statusLine.split(" ");
 			String method = requestLines[0];
 			String url = requestLines[1];
 			String httpVersion = requestLines[2];
