@@ -2,6 +2,8 @@ package com.turing.tdd.advancedse5.tdd.webserver;
 
 import java.util.Map.Entry;
 
+import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpResponse;
+
 public class HttpResponseTransformer {
 	public byte[] transformResponse(HttpResponse response)
 	{

@@ -2,12 +2,14 @@ package com.turing.tdd.advancedse5.tdd.webserver;
 
 import java.util.HashMap;
 
+import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpRequest;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HttpRequestParser {
 	
-	HttpRequest parseRequest(String httpRequest)
+	public HttpRequest parseRequest(String httpRequest)
 	{
 		HttpRequest response = new HttpRequest();
 		String[] lines = httpRequest.split("\r\n");

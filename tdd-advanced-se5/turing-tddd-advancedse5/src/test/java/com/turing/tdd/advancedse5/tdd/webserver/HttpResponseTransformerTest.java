@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpResponse;
+
 public class HttpResponseTransformerTest {
 	@Test
 	public void testStatusLine()

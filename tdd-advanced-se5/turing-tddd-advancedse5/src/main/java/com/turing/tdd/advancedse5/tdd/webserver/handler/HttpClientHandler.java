@@ -1,10 +1,17 @@
-package com.turing.tdd.advancedse5.tdd.webserver;
+package com.turing.tdd.advancedse5.tdd.webserver.handler;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+
+import com.turing.tdd.advancedse5.tdd.webserver.HttpRequestParser;
+import com.turing.tdd.advancedse5.tdd.webserver.HttpResponseTransformer;
+import com.turing.tdd.advancedse5.tdd.webserver.io.HttpRequestReader;
+import com.turing.tdd.advancedse5.tdd.webserver.io.HttpResponseWriter;
+import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpRequest;
+import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,42 +58,16 @@ public class HttpClientHandler extends Thread{
 		this.request =  this.parser.parseRequest(httpRequestString);
 	}
 	private String readHttpRequestStream() {
-		String httpRequest = "";
-		DataInputStream  din = null;
-		try
-		{
-			din = new DataInputStream(this.socket.getInputStream());
-			log.info("Parse Request");
-			int contentLength = 0;
-			
-			String line = din.readLine();
-			while(line!= null && !line.isEmpty())
-			{
-				log.info("Line "+line);
-				httpRequest += line +"\r\n";
-				line = din.readLine();
-				if(line.startsWith("Content-Length"))
-				{
-					contentLength = Integer.parseInt(line.split(":")[1].trim());
-				}
-			}
-			httpRequest += "\r\n";
-			if(contentLength>0)
-			{
-				byte[] bytes = new byte[contentLength];
-				din.read(bytes);
-				String body = new String(bytes);
-				log.info("Body-> "+body);
-				httpRequest += body ;
-			}
-			log.info("Done ");
-			log.info(httpRequest);
-		}
-		catch(Exception e)
-		{
+		HttpRequestReader reader;
+		String result= "";
+		try {
+			reader = new HttpRequestReader(this.socket.getInputStream());
+			result = reader.readHttpRequestStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return httpRequest;
+		return result;
 	}
 	void procesResponse()
 	{
@@ -99,12 +80,14 @@ public class HttpClientHandler extends Thread{
 		String responseStr = new String(data);
 		log.info("Response "+responseStr);
 		
-		try(DataOutputStream dout = new DataOutputStream(this.socket.getOutputStream()))
-		{
-			dout.write(data);
-		} catch (Exception e) {
+		HttpResponseWriter writer;
+		try {
+			writer = new HttpResponseWriter(this.socket.getOutputStream());
+			writer.write(data);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }

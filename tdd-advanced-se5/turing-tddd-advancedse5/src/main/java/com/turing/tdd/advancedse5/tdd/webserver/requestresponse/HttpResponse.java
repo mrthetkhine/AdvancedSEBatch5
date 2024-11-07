@@ -1,4 +1,4 @@
-package com.turing.tdd.advancedse5.tdd.webserver;
+package com.turing.tdd.advancedse5.tdd.webserver.requestresponse;
 
 public class HttpResponse extends HttpMessage{
 	private int statusCode;
