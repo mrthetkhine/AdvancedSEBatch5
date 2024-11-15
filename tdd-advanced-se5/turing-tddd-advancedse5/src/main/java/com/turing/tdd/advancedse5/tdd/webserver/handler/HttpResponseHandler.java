@@ -14,27 +14,19 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class HttpResponseHandler {
-	private static final String DELETE = "DELETE";
-	private static final String POST = "POST";
-	private static final String GET = "GET";
-
-	ResponseHandler getHandler = new GetHandler();
+	
+	ResponseHandlerFactory factory;
+	public HttpResponseHandler(ResponseHandlerFactory factory)
+	{
+		this.factory = factory;
+	}
 	
 	public HttpResponse handle(HttpRequest request)
 	{
 		HttpResponse response = new HttpResponse();
-		if(GET.equals(request.getHttpMethod()))
-		{
-			getHandler.handle(request, response);
-		}
-		else if(POST.equals(request.getHttpMethod()))
-		{
-			
-		}
-		else if(DELETE.equals(request.getHttpMethod()))
-		{
-			
-		}
+		
+		ResponseHandler handler = this.factory.getResponseHandler(request.getHttpMethod());
+		handler.handle(request, response);
 		
 		return response;
 	}

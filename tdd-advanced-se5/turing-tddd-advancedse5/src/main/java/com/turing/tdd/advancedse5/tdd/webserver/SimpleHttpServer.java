@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.turing.tdd.advancedse5.tdd.webserver.handler.HandlerFactory;
+import com.turing.tdd.advancedse5.tdd.webserver.handler.ClientHandlerFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,9 +16,9 @@ public class SimpleHttpServer {
 	boolean isClosed = false;
 	ServerSocket serverSocket;
 	
-	HandlerFactory handlerFactory;
+	ClientHandlerFactory handlerFactory;
 	
-	public SimpleHttpServer(int port,HandlerFactory handlerFactory)
+	public SimpleHttpServer(int port,ClientHandlerFactory handlerFactory)
 	{
 		this.port = port;
 		this.handlerFactory = handlerFactory;

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.turing.tdd.advancedse5.tdd.webserver.handler.HandlerFactory;
+import com.turing.tdd.advancedse5.tdd.webserver.handler.ClientHandlerFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WebServerTest {
 
 	static SimpleHttpServer server;
-	static HandlerFactory factory = new HandlerFactory();
+	static ClientHandlerFactory factory = new ClientHandlerFactory();
 	@BeforeAll
 	static public void setUpServer()
 	{

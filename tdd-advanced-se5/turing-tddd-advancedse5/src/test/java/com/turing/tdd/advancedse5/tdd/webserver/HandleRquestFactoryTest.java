@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import com.turing.tdd.advancedse5.tdd.webserver.handler.HandlerFactory;
+import com.turing.tdd.advancedse5.tdd.webserver.handler.ClientHandlerFactory;
 
 public class HandleRquestFactoryTest {
 
@@ -19,7 +19,7 @@ public class HandleRquestFactoryTest {
 	public void testRequestHandleWhenConnect() throws UnknownHostException, IOException
 	{
 		
-		HandlerFactory factory = Mockito.mock(HandlerFactory.class);
+		ClientHandlerFactory factory = Mockito.mock(ClientHandlerFactory.class);
 		SimpleHttpServer server = new SimpleHttpServer(8080,factory);
 		CompletableFuture<Void> future = CompletableFuture.runAsync(new Runnable() {
 			@Override

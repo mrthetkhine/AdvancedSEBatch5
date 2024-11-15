@@ -15,15 +15,15 @@ import com.turing.tdd.advancedse5.tdd.webserver.requestresponse.HttpResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GetHandler extends ResponseHandler{
+public class DeleteHandler extends ResponseHandler{
 
 	
 	@Override
 	public void handle(HttpRequest request, HttpResponse response) {
 		
-		handleGet(request,response);
+		handlePost(request,response);
 	}
-	private void handleGet(HttpRequest request, HttpResponse response) {
+	private void handlePost(HttpRequest request, HttpResponse response) {
 		Path path = getPathFromUrl(request);
 		try {
 			//Path path =Paths.get(Config.ROOT_URL+"/index.html");
