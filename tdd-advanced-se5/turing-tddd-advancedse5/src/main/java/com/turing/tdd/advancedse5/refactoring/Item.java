@@ -1,8 +1,8 @@
 package com.turing.tdd.advancedse5.refactoring;
 
 public class Item {
-    private static final int MIN_QTY_LIMIT = 0;
-	private static final int MAX_QTY_LIMIT = 50;
+    static final int MIN_QTY_LIMIT = 0;
+	static final int MAX_QTY_LIMIT = 50;
     public String name;
 
     public int sellIn;
@@ -33,9 +33,13 @@ public class Item {
     }
     void updateQualityWhenSellInLow()
     {
-    	if (this.quality > 0) {
-			this.quality = this.quality - 1;
-        }
+    	if (this.sellIn < 0) 
+    	{
+    		if (this.quality > 0) {
+    			this.quality = this.quality - 1;
+            }
+    	}
+    	
     }
    @Override
    public String toString() {
